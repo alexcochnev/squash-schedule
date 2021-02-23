@@ -25,7 +25,10 @@ SECRET_KEY = 'o-6__-c-ka^o+(#c$!atacmk!3r*s566m*fwn)w-6-1c*_#vz-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://squashschedule.herokuapp.com']
+ALLOWED_HOSTS = ['https://squashschedule.herokuapp.com',
+                 'https://squashschedule.herokuapp.com/',
+                 'squashschedule.herokuapp.com/',
+                 'squashschedule.herokuapp.com']
 
 
 # Application definition
