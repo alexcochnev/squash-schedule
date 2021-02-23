@@ -28,7 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['https://squashschedule.herokuapp.com',
                  'https://squashschedule.herokuapp.com/',
                  'squashschedule.herokuapp.com/',
-                 'squashschedule.herokuapp.com']
+                 'squashschedule.herokuapp.com',
+                 '127.0.0.1',
+                 'localhost',
+                 '0.0.0.0']
 
 
 # Application definition
@@ -106,7 +109,13 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ),
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework.renderers.JSONRenderer',
+    # ),
+    # 'DEFAULT_PARSER_CLASSES': (
+    #     'rest_framework.parsers.JSONParser',
+    # )
 }
 
 # Internationalization
