@@ -1,6 +1,6 @@
 django
 gunicorn
 django-heroku
-rest_framework
-pytz==2018.9
-sqlparse==0.3.0
+djangorestframework
+pytz
+sqlparse
