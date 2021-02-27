@@ -23,12 +23,15 @@ def api_index(request):
     return Response(details)
 
 
-@define_usage(returns={'schedule_leninka': 'List'})
+@define_usage(params={'days': 'Integer', 'offset': 'Integer'},
+              returns={'schedule_leninka': 'List'})
 @api_view(['GET'])
 def api_leninka(request):
     resp = json.loads(re.sub(r'[)(;]', '', r.get('https://api.sportbs.net/v1_0/model/index/3148').text))
     schedule = []
-    for i in range(14):
+    days = int(request.GET['days']) if 'days' in request.GET else 14
+    offset = int(request.GET['offset']) if 'offset' in request.GET else 0
+    for i in range(offset, days+offset):
         try:
             raw_date = datetime.today() + timedelta(i)
             date = raw_date.strftime('%Y-%m-%d')
@@ -45,7 +48,8 @@ def api_leninka(request):
     return Response(schedule)
 
 
-@define_usage(returns={'schedule_dubrovka': 'List'})
+@define_usage(params={'days': 'Integer', 'offset': 'Integer'},
+              returns={'schedule_dubrovka': 'List'})
 @api_view(['GET'])
 def api_dubrovka(request):
     # ближайшие 2 недели, вечер
@@ -55,7 +59,9 @@ def api_dubrovka(request):
         'user-agent': '''Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
     Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344'''
     }
-    for i in range(14):
+    days = int(request.GET['days']) if 'days' in request.GET else 14
+    offset = int(request.GET['offset']) if 'offset' in request.GET else 0
+    for i in range(offset, days+offset):
         try:
             raw_date = datetime.today() + timedelta(i)
             date = raw_date.strftime('%Y-%m-%d')
@@ -73,17 +79,19 @@ def api_dubrovka(request):
     return Response(schedule)
 
 
-@define_usage(returns={'schedule_shabolovka': 'List'})
+@define_usage(params={'days': 'Integer', 'offset': 'Integer'},
+              returns={'schedule_shabolovka': 'List'})
 @api_view(['GET'])
 def api_shabolovka(request):
-    # ближайшие 2 недели
     schedule = []
     headers_shabolovka = {
         'authorization': 'Bearer yusw3yeu6hrr4r9j3gw6',
         'user-agent': '''Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
     Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344'''
     }
-    for i in range(14):
+    days = int(request.GET['days']) if 'days' in request.GET else 14
+    offset = int(request.GET['offset']) if 'offset' in request.GET else 0
+    for i in range(offset, days+offset):
         try:
             raw_date = datetime.today() + timedelta(i)
             date = raw_date.strftime('%Y-%m-%d')
