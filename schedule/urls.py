@@ -21,6 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.api_index, name='api_index'),
     path('leninka/', views.api_leninka, name='api_leninka'),
+    path('leninka_days/', views.api_leninka_days, name='api_leninka_days'),
     path('dubrovka/', views.api_dubrovka, name='api_dubrovka'),
+    path('dubrovka_day/', views.api_dubrovka_day, name='api_dubrovka_day'),
     path('shabolovka/', views.api_shabolovka, name='api_shabolovka'),
+    path('shabolovka_day/', views.api_shabolovka_day, name='api_shabolovka_day'),
 ]
