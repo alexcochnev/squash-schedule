@@ -6,3 +6,4 @@ pytz
 sqlparse
 requests
 whitenoise
+django-cors-headers
