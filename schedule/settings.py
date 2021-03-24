@@ -142,10 +142,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ALLOWED_ORIGINS = [
-    "http://xn--b1apnj2b.xn--p1acf",
-    "http://localhost:63342",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://xn--b1apnj2b.xn--p1acf",
+#     "http://localhost:63342",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
