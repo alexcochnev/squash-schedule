@@ -117,7 +117,7 @@ def api_dubrovka_day(request):
         raw_date = datetime.strptime(date, '%Y-%m-%d')
         answer = {'date': raw_date.strftime('%d.%m'), 'week': week[raw_date.weekday()],
                   '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0}
-        day_resp = r.get(f'https://n136076.yclients.com/api/v1/book_times/144563/-1/{date}?service_ids%5B%5D=2177728',
+        day_resp = r.get(f'https://n136076.yclients.com/api/v1/book_times/144563/-1/{date}?service_ids%5B%5D=7180529',
                          headers=headers_dubrovka).json()
         for time in day_resp:
             if time['time'] in ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']:
