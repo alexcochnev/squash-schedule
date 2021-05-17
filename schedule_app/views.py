@@ -90,7 +90,7 @@ def api_dubrovka(request):
             answer = {'date': raw_date.strftime('%d.%m'), 'week': week[raw_date.weekday()],
                       '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0}
             day_resp = r.get(
-                f'https://n136076.yclients.com/api/v1/book_times/144563/-1/{date}?service_ids%5B%5D=7180529',
+                f'https://n149933.yclients.com/api/v1/book_times/144563/-1/{date}?service_ids%5B%5D=7180529',
                 headers=headers_dubrovka).json()
             for time in day_resp:
                 if time['time'] in ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']:
@@ -117,8 +117,64 @@ def api_dubrovka_day(request):
         raw_date = datetime.strptime(date, '%Y-%m-%d')
         answer = {'date': raw_date.strftime('%d.%m'), 'week': week[raw_date.weekday()],
                   '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0}
-        day_resp = r.get(f'https://n136076.yclients.com/api/v1/book_times/144563/-1/{date}?service_ids%5B%5D=7180529',
+        day_resp = r.get(f'https://n149933.yclients.com/api/v1/book_times/144563/-1/{date}?service_ids%5B%5D=7180529',
                          headers=headers_dubrovka).json()
+        for time in day_resp:
+            if time['time'] in ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']:
+                answer[time['time'].replace(':00', '')] = 1
+    except IndexError:
+        pass
+    return Response(answer)
+
+
+@define_usage(params={'days': 'Integer', 'offset': 'Integer'},
+              returns={'schedule_tula': 'List'})
+@api_view(['GET'])
+def api_tula(request):
+    schedule = []
+    headers_tula = {
+        'authorization': 'Bearer yusw3yeu6hrr4r9j3gw6, User ec8ecfaf1072c39041a7cc582a8ac232',
+        'user-agent': '''Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
+    Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344'''
+    }
+    days = int(request.GET['days']) if 'days' in request.GET else 14
+    offset = int(request.GET['offset']) if 'offset' in request.GET else 0
+    for i in range(offset, days+offset):
+        try:
+            raw_date = datetime.today() + timedelta(i)
+            date = raw_date.strftime('%Y-%m-%d')
+            answer = {'date': raw_date.strftime('%d.%m'), 'week': week[raw_date.weekday()],
+                      '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0}
+            day_resp = r.get(
+                f'https://n149933.yclients.com/api/v1/book_times/468810/-1/{date}?service_ids%5B%5D=7180529',
+                headers=headers_tula).json()
+            for time in day_resp:
+                if time['time'] in ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']:
+                    answer[time['time'].replace(':00', '')] = 1
+            schedule.append(answer)
+        except IndexError:
+            pass
+    return Response(schedule)
+
+
+@define_usage(params={'date': 'Date: yyyy-mm-dd'},
+              returns={'schedule_tula': 'Dict'})
+@api_view(['GET'])
+# расписание на 1 день
+def api_tula_day(request):
+    headers_tula = {
+        'authorization': 'Bearer yusw3yeu6hrr4r9j3gw6, User ec8ecfaf1072c39041a7cc582a8ac232',
+        'user-agent': '''Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) \
+    Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344'''
+    }
+    answer = {}
+    try:
+        date = request.GET['date'] if 'date' in request.GET else datetime.today().strftime('%Y-%m-%d')
+        raw_date = datetime.strptime(date, '%Y-%m-%d')
+        answer = {'date': raw_date.strftime('%d.%m'), 'week': week[raw_date.weekday()],
+                  '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0}
+        day_resp = r.get(f'https://n149933.yclients.com/api/v1/book_times/468810/-1/{date}?service_ids%5B%5D=7180529',
+                         headers=headers_tula).json()
         for time in day_resp:
             if time['time'] in ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00']:
                 answer[time['time'].replace(':00', '')] = 1
