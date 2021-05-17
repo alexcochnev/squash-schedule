@@ -24,6 +24,8 @@ urlpatterns = [
     path('leninka_days/', views.api_leninka_days, name='api_leninka_days'),
     path('dubrovka/', views.api_dubrovka, name='api_dubrovka'),
     path('dubrovka_day/', views.api_dubrovka_day, name='api_dubrovka_day'),
+    path('tula/', views.api_tula, name='api_tula'),
+    path('tula_day/', views.api_tula_day, name='api_tula_day'),
     path('shabolovka/', views.api_shabolovka, name='api_shabolovka'),
     path('shabolovka_day/', views.api_shabolovka_day, name='api_shabolovka_day'),
 ]
