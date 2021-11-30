@@ -7,6 +7,10 @@ import requests as r
 from datetime import datetime, timedelta
 import re
 import json
+import urllib3
+
+urllib3.disable_warnings()
+urllib3.util.ssl_.DEFAULT_CIPHERS += ':HIGH:!DH:!aNULL'
 
 week = {0: 'ПН', 1: 'ВТ', 2: 'СР', 3: 'ЧТ', 4: 'ПТ', 5: 'СБ', 6: 'ВС'}
 

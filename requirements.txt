@@ -7,3 +7,4 @@ sqlparse
 requests
 whitenoise
 django-cors-headers
+urllib3
